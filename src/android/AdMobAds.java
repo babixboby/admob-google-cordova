@@ -191,7 +191,7 @@ public class AdMobAds extends CordovaPlugin implements IConnectivityChange {
         } else if (ACTION_SHOW_INTERSTITIAL_AD.equals(action)) {
             result = executeShowInterstitialAd(callbackContext);
 
-        } else if (ACTION_RECORD_RESOLUTION.equals(action)) {
+        } /*else if (ACTION_RECORD_RESOLUTION.equals(action)) {
             int purchaseId = args.getInt(0);
             int resolution = args.getInt(1);
             result = executeRecordResolution(purchaseId, resolution, callbackContext);
@@ -201,7 +201,7 @@ public class AdMobAds extends CordovaPlugin implements IConnectivityChange {
             int billingResponseCode = args.getInt(1);
             result = executeRecordPlayBillingResolution(purchaseId, billingResponseCode, callbackContext);
 
-        } else {
+        } */else {
             Log.d(ADMOBADS_LOGTAG, String.format("Invalid action passed: %s", action));
             return false;
         }
