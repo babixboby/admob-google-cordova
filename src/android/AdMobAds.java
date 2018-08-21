@@ -623,7 +623,7 @@ public class AdMobAds extends CordovaPlugin implements IConnectivityChange {
     private void createInterstitialView(String _iid, AdMobAdsAdListener adListener) {
         interstitialAd = new InterstitialAd(cordova.getActivity());
         interstitialAd.setAdUnitId(_iid);
-        interstitialAd.setInAppPurchaseListener(inAppPurchaseListener);
+        //interstitialAd.setInAppPurchaseListener(inAppPurchaseListener);
         interstitialAd.setAdListener(adListener);
         interstitialAd.loadAd(buildAdRequest());
     }
