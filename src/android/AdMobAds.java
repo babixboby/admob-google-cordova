@@ -103,7 +103,7 @@ public class AdMobAds extends CordovaPlugin implements IConnectivityChange {
     private AdMobAdsAdListener interstitialListener = new AdMobAdsAdListener(INTERSTITIAL, this, false);
     private AdMobAdsAdListener backFillBannerListener = new AdMobAdsAdListener(BANNER, this, true);
     private AdMobAdsAdListener backFillInterstitialListener = new AdMobAdsAdListener(INTERSTITIAL, this, true);
-    private AdMobAdsAppPurchaseListener inAppPurchaseListener = new AdMobAdsAppPurchaseListener(this);
+    //private AdMobAdsAppPurchaseListener inAppPurchaseListener = new AdMobAdsAppPurchaseListener(this);
     private boolean isInterstitialAvailable = false;
     private boolean isNetworkActive = false;
     private boolean isBannerRequested = false;
@@ -700,7 +700,7 @@ public class AdMobAds extends CordovaPlugin implements IConnectivityChange {
         });
         return null;
     }
-
+/*
     private PluginResult executeRecordResolution(final int purchaseId, final int resolution, final CallbackContext callbackContext) {
         final InAppPurchase purchase = inAppPurchaseListener.getPurchase(purchaseId);
         if (purchase != null) {
@@ -745,7 +745,7 @@ public class AdMobAds extends CordovaPlugin implements IConnectivityChange {
 
         return null;
     }
-
+*/
     public void tryBackfill(String adType) {
         if (BANNER.equals(adType)) {
             String __pid = publisherId;
