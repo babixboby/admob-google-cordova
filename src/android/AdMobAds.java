@@ -69,8 +69,8 @@ public class AdMobAds extends CordovaPlugin implements IConnectivityChange {
     public static final String BANNER = "banner";
 
     private static final boolean CORDOVA_4 = Integer.valueOf(CordovaWebView.CORDOVA_VERSION.split("\\.")[0]) >= 4;
-    private static final String DEFAULT_AD_PUBLISHER_ID = "ca-app-pub-8440343014846849/3119840614";
-    private static final String DEFAULT_INTERSTITIAL_PUBLISHER_ID = "ca-app-pub-8440343014846849/4596573817";
+    private static final String DEFAULT_AD_PUBLISHER_ID = "ca-app-pub-4368546491336706/1121750508";
+    private static final String DEFAULT_INTERSTITIAL_PUBLISHER_ID = "ca-app-pub-4368546491336706/8645017308";
     private static final String DEFAULT_TAPPX_ID = "/120940746/Pub-2700-Android-8171";
 
     /* Cordova Actions. */
@@ -103,7 +103,7 @@ public class AdMobAds extends CordovaPlugin implements IConnectivityChange {
     private AdMobAdsAdListener interstitialListener = new AdMobAdsAdListener(INTERSTITIAL, this, false);
     private AdMobAdsAdListener backFillBannerListener = new AdMobAdsAdListener(BANNER, this, true);
     private AdMobAdsAdListener backFillInterstitialListener = new AdMobAdsAdListener(INTERSTITIAL, this, true);
-    //private AdMobAdsAppPurchaseListener inAppPurchaseListener = new AdMobAdsAppPurchaseListener(this);
+    private AdMobAdsAppPurchaseListener inAppPurchaseListener = new AdMobAdsAppPurchaseListener(this);
     private boolean isInterstitialAvailable = false;
     private boolean isNetworkActive = false;
     private boolean isBannerRequested = false;
@@ -191,7 +191,7 @@ public class AdMobAds extends CordovaPlugin implements IConnectivityChange {
         } else if (ACTION_SHOW_INTERSTITIAL_AD.equals(action)) {
             result = executeShowInterstitialAd(callbackContext);
 
-        } /*else if (ACTION_RECORD_RESOLUTION.equals(action)) {
+        } else if (ACTION_RECORD_RESOLUTION.equals(action)) {
             int purchaseId = args.getInt(0);
             int resolution = args.getInt(1);
             result = executeRecordResolution(purchaseId, resolution, callbackContext);
@@ -201,7 +201,7 @@ public class AdMobAds extends CordovaPlugin implements IConnectivityChange {
             int billingResponseCode = args.getInt(1);
             result = executeRecordPlayBillingResolution(purchaseId, billingResponseCode, callbackContext);
 
-        } */else {
+        } else {
             Log.d(ADMOBADS_LOGTAG, String.format("Invalid action passed: %s", action));
             return false;
         }
@@ -605,13 +605,13 @@ public class AdMobAds extends CordovaPlugin implements IConnectivityChange {
                     _interstitialAdId = DEFAULT_TAPPX_ID;
                 }
             } else if (!isGo2TappxInIntesrtitialBackfill) {
-                _interstitialAdId = "ca-app-pub-8440343014846849/4596573817";
+                _interstitialAdId = "ca-app-pub-4368546491336706/8645017308";
                 isGo2TappxInIntesrtitialBackfill = true;
             } else {
                 _interstitialAdId = DEFAULT_TAPPX_ID;
             }
         } else if (isBackFill && !isGo2TappxInIntesrtitialBackfill) {
-            _interstitialAdId = "ca-app-pub-8440343014846849/4596573817";
+            _interstitialAdId = "ca-app-pub-4368546491336706/8645017308";
             isGo2TappxInIntesrtitialBackfill = true;
         } else if (isBackFill) {
             _interstitialAdId = DEFAULT_TAPPX_ID;
@@ -623,7 +623,7 @@ public class AdMobAds extends CordovaPlugin implements IConnectivityChange {
     private void createInterstitialView(String _iid, AdMobAdsAdListener adListener) {
         interstitialAd = new InterstitialAd(cordova.getActivity());
         interstitialAd.setAdUnitId(_iid);
-        //interstitialAd.setInAppPurchaseListener(inAppPurchaseListener);
+        interstitialAd.setInAppPurchaseListener(inAppPurchaseListener);
         interstitialAd.setAdListener(adListener);
         interstitialAd.loadAd(buildAdRequest());
     }
@@ -700,7 +700,7 @@ public class AdMobAds extends CordovaPlugin implements IConnectivityChange {
         });
         return null;
     }
-/*
+
     private PluginResult executeRecordResolution(final int purchaseId, final int resolution, final CallbackContext callbackContext) {
         final InAppPurchase purchase = inAppPurchaseListener.getPurchase(purchaseId);
         if (purchase != null) {
@@ -745,7 +745,7 @@ public class AdMobAds extends CordovaPlugin implements IConnectivityChange {
 
         return null;
     }
-*/
+
     public void tryBackfill(String adType) {
         if (BANNER.equals(adType)) {
             String __pid = publisherId;
