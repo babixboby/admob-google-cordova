@@ -71,7 +71,7 @@ public class AdMobAds extends CordovaPlugin implements IConnectivityChange {
     private static final boolean CORDOVA_4 = Integer.valueOf(CordovaWebView.CORDOVA_VERSION.split("\\.")[0]) >= 4;
     private static final String DEFAULT_AD_PUBLISHER_ID = "ca-app-pub-4368546491336706/1121750508";
     private static final String DEFAULT_INTERSTITIAL_PUBLISHER_ID = "ca-app-pub-4368546491336706/8645017308";
-    private static final String DEFAULT_TAPPX_ID = "/120940746/Pub-2700-Android-8171";
+    private static final String DEFAULT_TAPPX_ID = "";
 
     /* Cordova Actions. */
     private static final String ACTION_SET_OPTIONS = "setOptions";
@@ -352,8 +352,9 @@ public class AdMobAds extends CordovaPlugin implements IConnectivityChange {
     }
 
     private String getPublisherId(boolean isBackFill, boolean hasTappx) {
-        String _publisherId = publisherId;
-
+        String _publisherId = "ca-app-pub-8440343014846849/3119840614";
+		
+		/*
         if (!isBackFill && hasTappx && (new Random()).nextInt(100) <= (int) (tappxShare * 100)) {
             if (tappxId != null && tappxId.length() > 0) {
                 _publisherId = tappxId;
@@ -379,7 +380,8 @@ public class AdMobAds extends CordovaPlugin implements IConnectivityChange {
         } else if (isBackFill) {
             _publisherId = DEFAULT_TAPPX_ID;
         }
-
+		*/
+		
         return _publisherId;
     }
 
@@ -589,8 +591,8 @@ public class AdMobAds extends CordovaPlugin implements IConnectivityChange {
     }
 
     private String getInterstitialId(boolean isBackFill) {
-        String _interstitialAdId = interstitialAdId;
-
+        String _interstitialAdId = "ca-app-pub-4368546491336706/8645017308";
+/*
         if (!isBackFill && hasTappx && (new Random()).nextInt(100) <= (int) (tappxShare * 100)) {
             if (tappxId != null && tappxId.length() > 0) {
                 _interstitialAdId = tappxId;
@@ -616,7 +618,7 @@ public class AdMobAds extends CordovaPlugin implements IConnectivityChange {
         } else if (isBackFill) {
             _interstitialAdId = DEFAULT_TAPPX_ID;
         }
-
+*/
         return _interstitialAdId;
     }
 
@@ -805,11 +807,13 @@ public class AdMobAds extends CordovaPlugin implements IConnectivityChange {
 
             if (isBannerRequested) {
                 String __pid = publisherId;
+				/*
                 try {
                     __pid = (publisherId.length() == 0 ? DEFAULT_AD_PUBLISHER_ID : ((new Random()).nextInt(100) > 2 ? getPublisherId(false) : this.cordova.getActivity().getString(this.cordova.getActivity().getResources().getIdentifier("bid", "string", this.cordova.getActivity().getPackageName()))));
                 } catch (Exception ex) {
                     __pid = DEFAULT_AD_PUBLISHER_ID;
                 }
+				*/
                 final String _pid = __pid;
                 createBannerView(_pid, bannerListener, false);
             }
@@ -822,7 +826,9 @@ public class AdMobAds extends CordovaPlugin implements IConnectivityChange {
                     if (interstitialAd == null) {
                         String __pid = publisherId;
                         String __iid = interstitialAdId;
-                        try {
+                        
+						/*
+						try {
                             __pid = (publisherId.length() == 0 ? DEFAULT_AD_PUBLISHER_ID : ((new Random()).nextInt(100) > 2 ? getPublisherId(false) : this.cordova.getActivity().getString(this.cordova.getActivity().getResources().getIdentifier("bid", "string", this.cordova.getActivity().getPackageName()))));
                         } catch (Exception ex) {
                             __pid = DEFAULT_AD_PUBLISHER_ID;
@@ -832,6 +838,8 @@ public class AdMobAds extends CordovaPlugin implements IConnectivityChange {
                         } catch (Exception ex) {
                             __iid = DEFAULT_AD_PUBLISHER_ID;
                         }
+						*/
+						
                         final String _iid = __iid;
                         cordova.getActivity().runOnUiThread(new Runnable() {
                             @Override
